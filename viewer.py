@@ -1,13 +1,4 @@
-# Streamlitで指定したURLの動画を表示するアプリ
 import streamlit as st
-
-st.title("動画プレーヤー")
-# サンプルとして使うURLを表示
-st.text("サンプル動画：https://youtu.be/G1_7ztjTaB4")
-video_url = st.text_input("動画のURLを入力してください")
-
-st.write(st.context.headers)
-st.write(st.context.url)
 
 # ユーザーエージェントに基づいてモバイル端末かどうかを判定する関数
 # 判定に失敗した場合はif_failedの値を返す。デフォルトはFalse
@@ -31,11 +22,25 @@ def st_is_mobile(if_failed=False):
         return if_failed
     return False
 
+st.set_page_config(page_title="テストアプリ", layout="wide")
+
 is_mobile = st_is_mobile()
 if is_mobile:
-    st.write("モバイル端末でアクセスしています。")
+    st.markdown("## モバイル端末でアクセスしています。")
+    st.image("img/vertical_image.jpg")
 else:
-    st.write("デスクトップ端末でアクセスしています。")
+    st.markdown("## デスクトップ端末でアクセスしています。")
+    st.image("img/horizontal_image.jpg")
+
+st.write(st.context.headers)
+
+# st.title("動画プレーヤー")
+# # サンプルとして使うURLを表示
+# st.text("サンプル動画：https://youtu.be/G1_7ztjTaB4")
+# video_url = st.text_input("動画のURLを入力してください")
+
+# st.write(st.context.url)
+
 
 if video_url:
     st.video(video_url)
